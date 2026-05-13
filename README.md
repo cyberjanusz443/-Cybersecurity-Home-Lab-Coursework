@@ -192,9 +192,9 @@ with cost estimates and AWS-specific recommendations
 
 ## 📫 Contact
 
-[Your Name]  
-LinkedIn: [your URL]  
-Email: [your email]
+[Jan Marszalek]  
+LinkedIn: [https://www.linkedin.com/in/jan-marsza%C5%82ek/]  
+Email: [marszalek.jan19@wp.pl]
 
 ---
 
