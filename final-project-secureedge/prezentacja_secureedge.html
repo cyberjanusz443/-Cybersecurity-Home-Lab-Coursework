@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureEdge Solutions - Plan Naprawczy Bezpieczeństwa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --accent-color: #3b82f6;
+            --danger-color: #dc2626;
+            --success-color: #16a34a;
+            --warning-color: #f59e0b;
+        }
+        
+        .reveal {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .reveal h1 {
+            color: var(--primary-color);
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 0.4em;
+        }
+        
+        .reveal h2 {
+            color: var(--primary-color);
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 0.6em;
+        }
+        
+        .reveal h3 {
+            color: var(--accent-color);
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 0.4em;
+        }
+        
+        .reveal p, .reveal li {
+            font-size: 0.65em;
+            line-height: 1.4;
+        }
+        
+        .reveal strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .stats-box {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 1.2em;
+            border-radius: 10px;
+            margin: 0.8em 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .stats-box h3 {
+            color: white;
+            margin-bottom: 0.3em;
+        }
+        
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5em;
+            margin: 1.5em 0;
+        }
+        
+        .impact-item {
+            background: #f8fafc;
+            padding: 1em;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent-color);
+        }
+        
+        .impact-item.danger {
+            border-left-color: var(--danger-color);
+        }
+        
+        .risk-high {
+            color: var(--danger-color);
+            font-weight: 700;
+        }
+        
+        .risk-medium {
+            color: var(--warning-color);
+            font-weight: 700;
+        }
+        
+        .phase-box {
+            background: #f1f5f9;
+            padding: 1em;
+            border-radius: 6px;
+            margin: 0.6em 0;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .phase-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.3em;
+        }
+        
+        .budget-highlight {
+            font-size: 1.2em;
+            color: var(--accent-color);
+            font-weight: 700;
+            margin: 0.4em 0;
+        }
+        
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 2em 0;
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-color);
+        }
+        
+        .timeline-item {
+            background: white;
+            padding: 1em;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            margin: 0 0.5em;
+        }
+        
+        .metric-card {
+            background: white;
+            padding: 1.5em;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 1em 0;
+        }
+        
+        .metric-value {
+            font-size: 1.4em;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+        
+        .metric-label {
+            color: #64748b;
+            font-size: 0.9em;
+            margin-top: 0.5em;
+        }
+        
+        .cta-box {
+            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+            color: white;
+            padding: 2em;
+            border-radius: 12px;
+            margin: 2em 0;
+            text-align: center;
+        }
+        
+        .cta-box h3 {
+            color: white;
+        }
+        
+        ul.compact {
+            list-style: none;
+            padding: 0;
+        }
+        
+        ul.compact li {
+            padding: 0.4em 0;
+            padding-left: 1.5em;
+            position: relative;
+        }
+        
+        ul.compact li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+        
+        .subtitle {
+            color: #64748b;
+            font-size: 0.8em;
+            margin-top: 0.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+        }
+        
+        table th {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.8em;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        table td {
+            padding: 0.8em;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        table tr:hover {
+            background: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- SLAJD 1: TYTUŁ -->
+            <section>
+                <h1>Plan Naprawczy Bezpieczeństwa</h1>
+                <h3 style="color: #64748b;">SecureEdge Solutions</h3>
+                <div style="margin-top: 3em;">
+                    <p style="font-size: 1.2em;">Security Architect</p>
+                    <p class="subtitle">Styczeń 2025</p>
+                </div>
+            </section>
+
+            <!-- SLAJD 2: PROBLEM -->
+            <section>
+                <h2>Dlaczego tu jesteśmy</h2>
+                <div class="stats-box">
+                    <h3>Grudzień 2024 - Incydent</h3>
+                    <p style="font-size: 1.3em;">Były pracownik ukradł dane <strong>52 klientów</strong></p>
+                </div>
+                <div class="impact-grid">
+                    <div class="impact-item danger">
+                        <p><strong>💰 350,000 PLN</strong></p>
+                        <p class="subtitle">Straty finansowe</p>
+                    </div>
+                    <div class="impact-item danger">
+                        <p><strong>3 klientów</strong></p>
+                        <p class="subtitle">Zerwali umowy</p>
+                    </div>
+                    <div class="impact-item danger">
+                        <p><strong>📰 Media</strong></p>
+                        <p class="subtitle">Negatywne artykuły</p>
+                    </div>
+                    <div class="impact-item danger">
+                        <p><strong>⚖️ UODO</strong></p>
+                        <p class="subtitle">Postępowanie</p>
+                    </div>
+                </div>
+                <p style="margin-top: 1.5em; font-style: italic; color: #dc2626;">
+                    "Uczymy inne firmy bezpieczeństwa, a sami dostaliśmy wyciek"
+                </p>
+            </section>
+
+            <!-- SLAJD 3: JAK TO SIĘ STAŁO -->
+            <section>
+                <h2>Jak to się mogło stać?</h2>
+                <div class="phase-box">
+                    <h4>1. Za dużo dostępów</h4>
+                    <p>Pracownik miał dostęp do danych których nie potrzebował</p>
+                </div>
+                <div class="phase-box">
+                    <h4>2. Nikt nie patrzył</h4>
+                    <p>System zapisywał logi, ale nikt ich nie czytał. Logował się o 2-3 w nocy - nikt nie zauważył</p>
+                </div>
+                <div class="phase-box">
+                    <h4>3. Słabe zwalnianie</h4>
+                    <p>Zabraliśmy laptop, ale NIE usunęliśmy dostępów AWS/VPN. Wrócił zdalnie 2 dni po zwolnieniu</p>
+                </div>
+                <div class="phase-box">
+                    <h4>4. Kultura "zrób szybko"</h4>
+                    <p>Pentest znalazł 2 krytyczne dziury - nie naprawiliśmy przez 6 miesięcy</p>
+                </div>
+            </section>
+
+            <!-- SLAJD 4: TOP RYZYKA -->
+            <section>
+                <h2>Co może się jeszcze stać?</h2>
+                <p style="margin-bottom: 1.5em;">Jeśli nic nie zmienimy:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Zagrożenie</th>
+                            <th>Prawdopodobieństwo</th>
+                            <th>Koszt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Kolejny wyciek</strong></td>
+                            <td><span class="risk-high">🔴 WYSOKIE</span></td>
+                            <td>>500k PLN + możliwy koniec firmy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ransomware</strong></td>
+                            <td><span class="risk-medium">🟡 ŚREDNIE</span></td>
+                            <td>200-800k PLN + tygodnie przestoju</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Błąd konfiguracji</strong></td>
+                            <td><span class="risk-high">🔴 WYSOKIE</span></td>
+                            <td>100-300k PLN + kara RODO</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Brak SOC2</strong></td>
+                            <td><span class="risk-high">🔴 WYSOKIE</span></td>
+                            <td>Utrata 2 największych klientów</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 1.5em; font-weight: 600; color: #dc2626;">
+                    Bez działania: firma prawdopodobnie nie przetrwa kolejnego incydentu
+                </p>
+            </section>
+
+            <!-- SLAJD 5: ROZWIĄZANIE - CIS CONTROLS -->
+            <section>
+                <h2>Rozwiązanie: CIS Controls IG1</h2>
+                <div class="stats-box">
+                    <h3>56 podstawowych zabezpieczeń</h3>
+                    <p>Stworzone dla firm 100-1000 osób</p>
+                </div>
+                <div style="margin-top: 2em;">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1em; font-size: 0.9em;">
+                        <div class="metric-card">
+                            <div>✓ Spis sprzętu</div>
+                        </div>
+                        <div class="metric-card">
+                            <div>✓ Kontrola dostępów</div>
+                        </div>
+                        <div class="metric-card">
+                            <div>✓ Monitoring</div>
+                        </div>
+                        <div class="metric-card">
+                            <div>✓ Ochrona danych</div>
+                        </div>
+                        <div class="metric-card">
+                            <div>✓ Kopie zapasowe</div>
+                        </div>
+                        <div class="metric-card">
+                            <div>✓ Szkolenia</div>
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-top: 2em; font-weight: 600; color: var(--accent-color);">
+                    Pokryjemy wszystkie luki które doprowadziły do incydentu
+                </p>
+            </section>
+
+            <!-- SLAJD 6: 3 FAZY -->
+            <section>
+                <h2>Plan wdrożenia: 3 fazy</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4 style="color: var(--accent-color);">Faza 1</h4>
+                        <p style="font-size: 0.9em;">0-3 mies</p>
+                        <p style="font-size: 0.85em; margin-top: 0.5em;">Szybkie wygrane</p>
+                        <p class="budget-highlight" style="font-size: 1.3em;">~50k PLN</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 style="color: var(--accent-color);">Faza 2</h4>
+                        <p style="font-size: 0.9em;">3-9 mies</p>
+                        <p style="font-size: 0.85em; margin-top: 0.5em;">Główne projekty</p>
+                        <p class="budget-highlight" style="font-size: 1.3em;">~450k PLN</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 style="color: var(--accent-color);">Faza 3</h4>
+                        <p style="font-size: 0.9em;">9-18 mies</p>
+                        <p style="font-size: 0.85em; margin-top: 0.5em;">Dojrzałość</p>
+                        <p class="budget-highlight" style="font-size: 1.3em;">~200k PLN</p>
+                    </div>
+                </div>
+                <div style="margin-top: 2em; text-align: center;">
+                    <p class="budget-highlight">TOTAL: 760,000 PLN</p>
+                    <p class="subtitle">18 miesięcy do pełnej dojrzałości</p>
+                </div>
+            </section>
+
+            <!-- SLAJD 7: QUICK WINS -->
+            <section>
+                <h2>Quick Wins - Pierwsze 30 dni</h2>
+                <p style="margin-bottom: 1em;">Prawie 0 PLN, maksymalny impact:</p>
+                <ul class="compact">
+                    <li>Napraw 2 CRITICAL z pentestu (1 dzień)</li>
+                    <li>Usuń prawdziwe dane ze staging (2 dni)</li>
+                    <li>MFA w AWS - kod z telefonu obowiązkowy (2h)</li>
+                    <li>Usuń 23 zombie accounts (4h)</li>
+                    <li>Podstawowe alerty email (4h)</li>
+                    <li>Immutable backups + TEST (1 dzień)</li>
+                    <li>Checklist przy zwalnianiu - 20 punktów (4h)</li>
+                    <li>Background checks dla nowych (2k PLN/osoba)</li>
+                </ul>
+                <div style="margin-top: 2em; padding: 1.5em; background: #dcfce7; border-radius: 8px;">
+                    <p style="font-weight: 600; color: var(--success-color);">
+                        ✓ Największe ryzyka spadają o 50% w miesiąc
+                    </p>
+                </div>
+            </section>
+
+            <!-- SLAJD 8: WŁASNE PRODUKTY -->
+            <section>
+                <h2>Wykorzystamy co już mamy</h2>
+                <div class="stats-box">
+                    <h3>🎯 Użyjemy WŁASNYCH produktów</h3>
+                    <div style="margin-top: 1.5em; font-size: 1.1em;">
+                        <p>✓ NASZ SIEM → Monitoring wewnętrzny</p>
+                        <p>✓ NASZE szkolenia → Security awareness</p>
+                        <p>✓ NASZE phishing sims → Testy pracowników</p>
+                    </div>
+                </div>
+                <div style="margin-top: 2em;">
+                    <h3>Dodatkowo wykorzystamy:</h3>
+                    <ul style="font-size: 0.95em;">
+                        <li>Microsoft 365 → Upgrade do E5 (DLP + lepszy antywirus)</li>
+                        <li>Okta → Już płacimy, dodamy automatyzację</li>
+                        <li>AWS → Włączymy wbudowane security tools</li>
+                    </ul>
+                </div>
+                <p style="margin-top: 1.5em; font-style: italic; color: var(--accent-color); font-weight: 600;">
+                    Marketing: "Używamy własnych produktów wewnętrznie" = Case study dla klientów
+                </p>
+            </section>
+
+            <!-- SLAJD 9: ZESPÓŁ -->
+            <section>
+                <h2>Zespół i kluczowe narzędzia</h2>
+                <div class="impact-grid">
+                    <div class="impact-item">
+                        <h4 style="color: var(--primary-color);">CISO</h4>
+                        <p>Dedykowana osoba - security</p>
+                        <p><strong>250k PLN/rok</strong></p>
+                        <p class="subtitle">Start: Luty 2025</p>
+                    </div>
+                    <div class="impact-item">
+                        <h4 style="color: var(--primary-color);">DevOps #2</h4>
+                        <p>Backup dla Marcina</p>
+                        <p><strong>180k PLN/rok</strong></p>
+                        <p class="subtitle">Start: Maj 2025</p>
+                    </div>
+                </div>
+                <div style="margin-top: 2em;">
+                    <h3>Główne narzędzia:</h3>
+                    <table style="font-size: 0.85em;">
+                        <tr>
+                            <td>Microsoft 365 E5 (DLP + EDR)</td>
+                            <td style="text-align: right;">+80k PLN/rok</td>
+                        </tr>
+                        <tr>
+                            <td>AWS security tools</td>
+                            <td style="text-align: right;">~35k PLN/rok</td>
+                        </tr>
+                        <tr>
+                            <td>Vulnerability scanning</td>
+                            <td style="text-align: right;">~30k PLN/rok</td>
+                        </tr>
+                        <tr>
+                            <td>SOC2 audit</td>
+                            <td style="text-align: right;">~80k PLN (one-time)</td>
+                        </tr>
+                        <tr style="background: #dcfce7;">
+                            <td><strong>Nasz SIEM + Training</strong></td>
+                            <td style="text-align: right;"><strong>0 PLN ✓</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SLAJD 10: BUDŻET -->
+            <section>
+                <h2>Budżet - Rok 1</h2>
+                <div class="metric-card" style="text-align: center;">
+                    <div class="metric-value">760,000 PLN</div>
+                    <div class="metric-label">18 miesięcy</div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1em; margin-top: 2em;">
+                    <div style="text-align: center; padding: 1em; background: #f1f5f9; border-radius: 8px;">
+                        <div style="font-size: 2em; color: var(--accent-color); font-weight: 700;">57%</div>
+                        <div style="font-size: 0.9em; margin-top: 0.5em;">Ludzie</div>
+                        <div style="font-size: 0.8em; color: #64748b;">430k PLN</div>
+                    </div>
+                    <div style="text-align: center; padding: 1em; background: #f1f5f9; border-radius: 8px;">
+                        <div style="font-size: 2em; color: var(--accent-color); font-weight: 700;">29%</div>
+                        <div style="font-size: 0.9em; margin-top: 0.5em;">Narzędzia</div>
+                        <div style="font-size: 0.8em; color: #64748b;">220k PLN</div>
+                    </div>
+                    <div style="text-align: center; padding: 1em; background: #f1f5f9; border-radius: 8px;">
+                        <div style="font-size: 2em; color: var(--accent-color); font-weight: 700;">14%</div>
+                        <div style="font-size: 0.9em; margin-top: 0.5em;">Projekty</div>
+                        <div style="font-size: 0.8em; color: #64748b;">110k PLN</div>
+                    </div>
+                </div>
+                <p style="margin-top: 2em; text-align: center; color: #64748b;">
+                    Rok 2: ~750k PLN (kontynuacja + ISO 27001)
+                </p>
+            </section>
+
+            <!-- SLAJD 11: ROI -->
+            <section>
+                <h2>Zwrot z inwestycji (ROI)</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 2em;">
+                    <div>
+                        <h3>Koszt projektu</h3>
+                        <div class="metric-value" style="color: var(--accent-color);">760k PLN</div>
+                    </div>
+                    <div>
+                        <h3>Koszt BRAKU projektu</h3>
+                        <div class="metric-value" style="color: var(--danger-color);">500k-1M PLN</div>
+                        <p class="subtitle">Kolejny incydent</p>
+                    </div>
+                </div>
+                <div style="margin-top: 2em;">
+                    <h3>Konkretne koszty braku działania:</h3>
+                    <ul style="font-size: 0.95em;">
+                        <li>Forensics + reagowanie: 80k PLN</li>
+                        <li>RODO kara: 50-200k PLN</li>
+                        <li>Utrata klientów: 200-500k PLN</li>
+                        <li>Brak SOC2 = utrata 2 największych (300k PLN ARR)</li>
+                        <li><strong>Możliwy koniec firmy: bezcenne</strong></li>
+                    </ul>
+                </div>
+                <div class="cta-box" style="margin-top: 2em;">
+                    <h3>Uniknięcie jednego incydentu = projekt się zwrócił</h3>
+                </div>
+            </section>
+
+            <!-- SLAJD 12: METRYKI SUKCESU -->
+            <section>
+                <h2>Jak zmierzymy sukces?</h2>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5em; margin-top: 1.5em;">
+                    <div class="phase-box">
+                        <h4>Techniczne</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li>0 krytycznych dziur >30 dni</li>
+                            <li>100% laptopów z EDR</li>
+                            <li>Reakcja <1h wykrycie, <24h response</li>
+                        </ul>
+                    </div>
+                    <div class="phase-box">
+                        <h4>Ludzie</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li>>95% przeszkolonych</li>
+                            <li><5% klika w phishing</li>
+                            <li>Monthly awareness updates</li>
+                        </ul>
+                    </div>
+                    <div class="phase-box">
+                        <h4>Biznes</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li>SOC2 certyfikat (wrzesień 2025)</li>
+                            <li>0 klientów utraconych</li>
+                            <li>0 wycieków danych</li>
+                        </ul>
+                    </div>
+                    <div class="phase-box">
+                        <h4>Marketing</h4>
+                        <ul style="font-size: 0.85em;">
+                            <li>Case study: "własne produkty"</li>
+                            <li>Pozytywne artykuły</li>
+                            <li>Referencje od klientów</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="margin-top: 1.5em; text-align: center; font-weight: 600;">
+                    Raport co 3 miesiące: 1 slajd z metrykami (zielony/czerwony)
+                </p>
+            </section>
+
+            <!-- SLAJD 13: TIMELINE -->
+            <section>
+                <h2>Timeline - 18 miesięcy</h2>
+                <div style="margin-top: 2em;">
+                    <div style="margin-bottom: 2em;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5em;">
+                            <div style="width: 30%; font-weight: 600; color: var(--primary-color);">M1-3: Faza 1</div>
+                            <div style="width: 70%; background: #dbeafe; height: 30px; border-radius: 4px; position: relative;">
+                                <div style="position: absolute; right: 10px; top: 5px; font-size: 0.85em;">Quick wins</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.8em; color: #64748b; margin-left: 30%;">
+                            ✓ Krytyczne dziury załatane • Monitoring • Offboarding
+                        </p>
+                    </div>
+                    
+                    <div style="margin-bottom: 2em;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5em;">
+                            <div style="width: 30%; font-weight: 600; color: var(--primary-color);">M4-9: Faza 2</div>
+                            <div style="width: 70%; background: #93c5fd; height: 30px; border-radius: 4px; position: relative;">
+                                <div style="position: absolute; right: 10px; top: 5px; font-size: 0.85em; color: white;">CISO, E5, SIEM, SOC2</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.8em; color: #64748b; margin-left: 30%;">
+                            ✓ CISO (M4) • E5 (M5) • SIEM (M6) • SOC2 (M9)
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5em;">
+                            <div style="width: 30%; font-weight: 600; color: var(--primary-color);">M10-18: Faza 3</div>
+                            <div style="width: 70%; background: #60a5fa; height: 30px; border-radius: 4px; position: relative;">
+                                <div style="position: absolute; right: 10px; top: 5px; font-size: 0.85em; color: white;">ISO, optymalizacja</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.8em; color: #64748b; margin-left: 30%;">
+                            ✓ ISO 27001 prep • PAM • Continuous improvement
+                        </p>
+                    </div>
+                </div>
+                <div style="margin-top: 2em; text-align: center; padding: 1em; background: #fef3c7; border-radius: 8px;">
+                    <p style="font-weight: 600; color: #92400e;">
+                        🎯 Kluczowy milestone: SOC2 certyfikat - Wrzesień 2025
+                    </p>
+                </div>
+            </section>
+
+            <!-- SLAJD 14: CZEGO POTRZEBUJEMY -->
+            <section>
+                <h2>Czego potrzebujemy od zarządu</h2>
+                <div style="margin-top: 1.5em;">
+                    <div class="phase-box">
+                        <h4>1. Budżet</h4>
+                        <p>760k PLN rok 1, 750k PLN rok 2</p>
+                    </div>
+                    <div class="phase-box">
+                        <h4>2. Hiring</h4>
+                        <p>CISO (start rekrutacji TERAZ) + DevOps #2 (maj)</p>
+                    </div>
+                    <div class="phase-box">
+                        <h4>3. Priorytet organizacyjny</h4>
+                        <p>Security = P0. Czasem opóźnimy feature żeby naprawić dziurę</p>
+                    </div>
+                    <div class="phase-box">
+                        <h4>4. Wsparcie</h4>
+                        <p>CEO champion projektu • Quarterly updates • Komunikacja do zespołu</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLAJD 15: PODSUMOWANIE -->
+            <section>
+                <h2>Podsumowanie</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 2em;">
+                    <div>
+                        <h3 style="color: var(--danger-color);">Problem</h3>
+                        <ul style="font-size: 0.9em;">
+                            <li>Wyciek danych 52 klientów</li>
+                            <li>Strata 350k PLN</li>
+                            <li>Zniszczona reputacja</li>
+                            <li>Ryzyko kolejnego = koniec</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--success-color);">Rozwiązanie</h3>
+                        <ul style="font-size: 0.9em;">
+                            <li>CIS Controls IG1</li>
+                            <li>3 fazy, 18 miesięcy</li>
+                            <li>Quick wins w miesiąc</li>
+                            <li>Własne produkty!</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top: 2em;">
+                    <div class="stats-box">
+                        <h3>Rezultat po 18 miesiącach</h3>
+                        <ul style="font-size: 0.95em;">
+                            <li>✓ SOC2 certified</li>
+                            <li>✓ Mature security posture</li>
+                            <li>✓ Pozytywna narracja: "Firma która się uczy"</li>
+                            <li>✓ Case study dla klientów</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top: 2em; text-align: center;">
+                    <p class="budget-highlight">760,000 PLN = uniknięcie katastrofy</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            transition: 'slide',
+            backgroundTransition: 'fade',
+            center: true,
+            width: 1920,
+            height: 1080,
+            margin: 0.08,
+            minScale: 0.2,
+            maxScale: 2.0,
+            controls: true,
+            progress: true,
+            slideNumber: 'c/t',
+            keyboard: true,
+            overview: true,
+            touch: true,
+            loop: false,
+            rtl: false,
+            navigationMode: 'default',
+            shuffle: false,
+            fragments: true,
+            embedded: false,
+            help: true,
+            showNotes: false,
+            autoPlayMedia: null,
+            preloadIframes: null,
+            autoSlide: 0,
+            autoSlideStoppable: true,
+            mouseWheel: false,
+            hideInactiveCursor: true,
+            hideCursorTime: 5000,
+            previewLinks: false
+        });
+    </script>
+</body>
+</html>

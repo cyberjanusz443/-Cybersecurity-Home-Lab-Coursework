@@ -1,14 +1,19 @@
-# -Cybersecurity-Home-Lab-Coursework
+# Cybersecurity Home Lab & Coursework
+
 Hands-on cybersecurity work completed during the **"Cybersecurity Specialist"** program 
 at Practima and the **"Web Application Attack & Defense"** course at Niebezpiecznik.pl 
 (Poland's leading cybersecurity training organization).
-This repository documents 26 lab exercises and a 69-page final security audit project,  completed across Junior → Medium → Senior → Expert difficulty levels.
+
+This repository documents 26 lab exercises and a 69-page final security audit project, 
+completed across Junior → Medium → Senior → Expert difficulty levels.
+
+---
 
 ## 🎯 Career Focus
 
 **Target role:** SOC Analyst L1 / Junior Security Analyst / Junior IT Security Administrator  
 **Specialization interest:** Blue Team, Linux server administration, OT/ICS security  
-**Location:** Warsaw, Łódź, Poland (open to hybrid / remote)
+**Location:** Warsaw, Poland (open to hybrid / remote)
 
 ---
 
@@ -187,9 +192,9 @@ with cost estimates and AWS-specific recommendations
 
 ## 📫 Contact
 
-[Jan Marszałek]  
-LinkedIn: [https://www.linkedin.com/in/jan-marsza%C5%82ek/]  
-Email: [marszalek.jan19@wp.pl]
+[Your Name]  
+LinkedIn: [your URL]  
+Email: [your email]
 
 ---
 
