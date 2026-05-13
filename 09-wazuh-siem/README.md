@@ -52,7 +52,7 @@ Ran the **CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0** against my agent:
 
 ## Key screenshots
 - `juniorliczbaAgentow.jpg` — Wazuh manager with 25 agents listed
-- `juniorThreadHuntingPrzemK.jpg` — Threat hunting dashboard with
+- `juniorThreadHuntingPK.jpg` — Threat hunting dashboard with
   SSH events, sudo escalations, integrity checks
 - `juniorVulnerabilityDetection.jpg` — CVE dashboard (6 critical, 790 high)
 - `juniorSCA.jpg` — CIS Ubuntu 24.04 LTS benchmark, 279 checks, 52% score
